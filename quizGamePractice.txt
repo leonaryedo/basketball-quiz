@@ -424,3 +424,178 @@ quizzes[0].show()
 quizzes[0].show_hint()
 quizzes[0].answer
 quizzes[0].check_answer(0)
+
+
+
+# 14. quiz_game.py 전체 틀 작성하기
+# quiz_game.py
+
+import json
+from datetime import datetime
+from quiz import Quiz
+
+
+class QuizGame:
+    def __init__(self):
+        """게임 초기화"""
+        # 1. 기본값 먼저 설정
+        self.state_file = "state.json"
+        self.quizzes = []
+        self.best_score = 0
+        self.best_record = {"correct": 0, "total": 0}
+        self.history = []
+
+        # 2. 저장된 데이터 불러오기
+        self.load_state()
+
+    # ──────────────────────────────────────────
+    # 데이터 관련
+    # ──────────────────────────────────────────
+
+    def load_state(self):
+        """state.json에서 데이터 로드"""
+        try:
+            with open(self.state_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+
+            self.quizzes = [Quiz.from_dict(q) for q in data.get("quizzes", [])]
+            self.best_score = data.get("best_score", 0)
+            self.best_record = data.get("best_record", {"correct": 0, "total": 0})
+            self.history = data.get("history", [])
+
+            print(f"✅ {len(self.quizzes)}개의 문제를 로드했습니다.")
+
+        except FileNotFoundError:
+            # 처음 실행할 때: 빈 파일 생성
+            print("⚠️  처음 실행입니다. 새 파일을 생성합니다.")
+            self.save_state(show_message=False)
+
+        except json.JSONDecodeError:
+            # 파일이 깨졌을 때: 기본값 유지
+            print("⚠️  저장 파일이 손상되었습니다. 빈 상태로 시작합니다.")
+
+        except Exception as e:
+            # 그 외 예상치 못한 오류
+            print(f"⚠️  데이터 로드 중 오류 발생: {e}")
+
+    def save_state(self, show_message=True):
+        """현재 상태를 state.json에 저장"""
+        try:
+            data = {
+                "quizzes": [q.to_dict() for q in self.quizzes],
+                "best_score": self.best_score,
+                "best_record": self.best_record,
+                "history": self.history
+            }
+
+            with open(self.state_file, "w", encoding="utf-8") as f:
+                json.dump(data, f, indent=4, ensure_ascii=False)
+
+            if show_message:
+                print("✅ 저장되었습니다.")
+
+        except Exception as e:
+            print(f"⚠️  저장 중 오류 발생: {e}")
+
+    # ──────────────────────────────────────────
+    # 메뉴 및 메인 루프
+    # ──────────────────────────────────────────
+
+    def show_welcome(self):
+        """시작 환영 메시지"""
+        print("\n" + "=" * 40)
+        print("   🏀 농구 퀴즈 게임에 오신 것을 환영합니다! 🏀")
+        print("=" * 40)
+
+    def show_menu(self):
+        """메인 메뉴 표시"""
+        print("\n" + "=" * 40)
+        print("           🏀 농구 퀴즈 게임 🏀")
+        print("=" * 40)
+        print("  1. 게임 시작")
+        print("  2. 최고 점수 보기")
+        print("  3. 게임 히스토리 보기")
+        print("  4. 문제 추가")
+        print("  5. 문제 삭제")
+        print("  6. 랜덤 게임")
+        print("  7. 커스텀 게임 (문제 수 선택)")
+        print("  0. 종료")
+        print("=" * 40)
+
+    def run(self):
+        """게임 메인 루프"""
+        self.show_welcome()
+
+        # 메뉴 번호 → 메서드 연결
+        menu_actions = {
+            "1": self.play_game,
+            "2": self.show_best_score,
+            "3": self.show_history,
+            "4": self.add_quiz,
+            "5": self.delete_quiz,
+            "6": self.random_play,
+            "7": self.custom_play,
+        }
+
+        while True:
+            try:
+                self.show_menu()
+                choice = input("  선택 (0~7): ").strip()
+
+                if choice == "0":
+                    self.save_state(show_message=False)
+                    print("\n👋 게임을 종료합니다. 또 만나요!\n")
+                    break
+
+                elif choice in menu_actions:
+                    menu_actions[choice]()  # 해당 메서드 실행
+
+                else:
+                    print("❌ 잘못된 선택입니다. 0~7 사이의 번호를 입력하세요.")
+
+            except KeyboardInterrupt:
+                # Ctrl+C 눌렀을 때 저장 후 종료
+                print("\n\n⚠️  강제 종료 감지. 저장 후 종료합니다.")
+                self.save_state(show_message=False)
+                break
+
+    # ──────────────────────────────────────────
+    # 기능 메서드 (나중에 구현)
+    # ──────────────────────────────────────────
+
+    def play_game(self):
+        """1. 게임 시작"""
+        pass
+
+    def show_best_score(self):
+        """2. 최고 점수 보기"""
+        pass
+
+    def show_history(self):
+        """3. 게임 히스토리 보기"""
+        pass
+
+    def add_quiz(self):
+        """4. 문제 추가"""
+        pass
+
+    def delete_quiz(self):
+        """5. 문제 삭제"""
+        pass
+
+    def random_play(self):
+        """6. 랜덤 게임"""
+        pass
+
+    def custom_play(self):
+        """7. 커스텀 게임"""
+        pass
+
+
+# ──────────────────────────────────────────
+# 진입점
+# ──────────────────────────────────────────
+
+if __name__ == "__main__":
+    game = QuizGame()
+    game.run()
