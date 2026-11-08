@@ -24,7 +24,7 @@
 
 - 1단계: 저장소 클론 (처음 가져올 때)
 ```bash
-git clone https://github.com/your-username/basketball-quiz.git
+git clone https://github.com/leonaryedo/basketball-quiz.git
 # git clone - GitHub 저장소를 로컬에 복사합니다.
 ```
 
