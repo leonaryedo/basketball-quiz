@@ -202,7 +202,7 @@ basketball-quiz/
           {
               "question": "농구에서 한 팀의 선수는 몇 명인가?",
               "choices": ["4명", "5명", "6명", "7명"],
-              "answer": 2,
+              "answer": 1,
               "hint": "NBA 경기에서 코트에 나가는 선수 수입니다."
           }
       ],
