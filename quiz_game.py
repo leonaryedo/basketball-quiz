@@ -1,7 +1,12 @@
 import json
 from pathlib import Path
-from datetime import datetime   #원래 관래상 모듈과 파일은 소문자로 시작, 클래스는 대문자로 시작인데... 이것은 초기 작성자가 클래스를 소문자로 작성함. 왜냐? 해당 모듈의 핵심 클래스는 소문자로 시작해서 알릴려고 했음.
+#from datetime import datetime   #원래 관래상 모듈과 파일은 소문자로 시작, 클래스는 대문자로 시작인데... 이것은 초기 작성자가 클래스를 소문자로 작성함. 왜냐? 해당 모듈의 핵심 클래스는 소문자로 시작해서 알릴려고 했음.
 from quiz import Quiz           #원래 관래상 모듈과 파일은 소문자로 시작, 클래스는 대문자로 시작
+
+#모듈은 .py파일 한 개, 패키지는 __init__.py가 있는 폴도로 여러 개의 모듈이 있음, 라이브러리는 여러 개의 패키지 모임
+from actions.play import play_game_action
+from actions.manage import add_quiz_action, show_quiz_list_action, delete_quiz_action
+from actions.record import show_best_score_action, show_history_action
 
 class QuizGame:
     def __init__(self):
@@ -49,7 +54,7 @@ class QuizGame:
         try:
             data = {
                 "quizzes" : [q.to_dict() for q in self.quizzes],
-                "bset_score" : self.best_score,
+                "best_score" : self.best_score,
                 "best_record" : self.best_record,
                 "history" : self.history
             }
@@ -83,6 +88,67 @@ class QuizGame:
         print("7. 종료")
         print("=" * 40)
 
-    def run(self)
+    def run(self):
         #게임 메인 루프
+        menu_actions = {
+            "1": self.play_game,
+            "2": self.add_quiz,
+            "3": self.show_quiz_list,
+            "4": self.show_best_score,
+            "5": self.delete_quiz,
+            "6": self.show_history,
+        }
+
+        while True:
+            try:
+                self.show_menu()
+                choice = input("선택: ").strip()     #input()은 티미널에 커서가 깜빡임. strip()은 앞뒤의 공백 및 줄바꿈 제거
+
+                if choice == "7":
+                    self.save_state(show_message=False)
+                    print("\n👋 게임을 종료합니다. 또 만나요!\n")
+                    break
+
+                elif choice in menu_actions:     # v in dict이면 v가 dict에 있는가? boolean반환. 단, 딕셔너리면 키값 비교, 리스트면 요소 비교, 문자역이면 부분 문자열 비교
+                    menu_actions[choice]()
+            
+            except KeyboardInterrupt:
+                print("\n\n⚠️  강제 종료 감지. 저장 후 종료합니다")
+                self.save_state(show_message=False)
+                break
+                
+    # ──────────────────────────────────────────
+    # 기능 메서드 (다음 단계에서 구현)
+    # ──────────────────────────────────────────
+    
+    def play_game(self):
+        #1. 퀴즈 풀기 -> actons/play.py
+        play_game_action(self)
+    
+    def add_quiz(self):
+        #2. 퀴즈 추가 ->actions/manage.py
+        add_quiz_action(self)
         
+    def show_quiz_list(self):
+        #3. 퀴즈 목록 -> actions>manage.py
+        show_quiz_list_action(self)
+        
+    def show_best_score(self):
+        #4. 최고 점수 확인 -> actions/record.py
+        show_best_score_action(self)
+        
+    def delete_quiz(self):
+        #5. 퀴즈 삭제 -> actions/manage.py
+        delete_quiz_action(self)
+        
+    def show_history(self):
+        #6. 점수 기록 보기 -> action/record.py
+        show_history_action(self)
+        
+# ──────────────────────────────────────────
+# 진입점
+# ──────────────────────────────────────────
+
+if __name__ == "__main__":   #__name__은 파이썬이 직접 저장하는 변수로 현재 파일이 직접 실행이 되면 "__main__"을 저장하고, 다른 파일에서 import하면 그 파일 명을 저장함
+    game = QuizGame()        #예: from quiz_game import QuizGame면 __name__에는 "quiz_game"이 저장된다.
+    game.run()
