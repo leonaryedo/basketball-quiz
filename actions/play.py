@@ -18,7 +18,7 @@ def play_game_action(game):
     
     # 1단계: 퀴즈 존재 여부 확인
     if not game.quizzes:     #game.quizzes가 비어 있으면( [], {}, "", 0, False, None)이면 False인데 앞에 not이 있으니 True가 되어 실행
-        print("\n❌ 등록된 퀴즈가 없습니다")
+        print("\n❌ 등록된 퀴즈가 없습니다.")
         print("먼저 퀴즈를 추가해주세요.\n")
         return               #return은 현재 실행되고 있는 그 함수만 즉시 종료하는 것으로 if, for와 같은 (블록)문의 종료가 아님.
     
@@ -50,4 +50,43 @@ def play_game_action(game):
         user_input = input("👉 답을 입력하세요: ").strip()
         
     # 7단계: 입력값 검증 및 정수 변환 ⭐ 추가됨
+    try:
+        user_answer = int(user_input)
+    except ValueError:
+        print("\n❌ 숫자를 입력해주세요!\n")
+        return
+
+    # 8단계: 정답 확인
+    is_correct = quiz.check_answer(user_answer)
+
+    if is_correct:
+        score = 10
+        print("\n✅ 정답입니다! (+10점)")
+        game.best_score += score
+    else:
+        score = 0
+        print(f"❌ 오답입니다.")
+        print(f"정답은: {quiz.choices[quiz.answer]}\n")
+
+    # 9단계: 기록 저장
+    record = {
+        "date": datetime.now().isoformat(),
+        "question": quiz.question,
+        "user_answer": user_answer,
+        "correct_answer": quiz.answer + 1,
+        "is_correct": is_correct,
+        "score": score
+    }
+    game.history.append(record)
+
+    # 10단계: 최고 기록 업데이트
+    game.best_record["total"] += 1
+    if is_correct:
+        game.best_record["correct"] += 1
+
+    # 11단계: 상태 저장
+    game.save_state()
+
+    print(f"📊 현재 점수: {game.best_score}점")
+    print(f"🏆 정답 횟수: {game.best_record['correct']}/{game.best_record['total']}회\n")
     
