@@ -56,14 +56,46 @@
             "hint": "득점, 리바운드, 어시스트 등에서 10 이상을 기록하는 것입니다."
         }
     ],
-    "best_score": 10,
+    "best_score": 50,
     "best_record": {
-        "correct": 1,
-        "total": 1
+        "correct": 5,
+        "total": 5
     },
     "history": [
         {
             "date": "2026-11-10T21:20:12.743367",
+            "question": "농구에서 파울이 6번이 되면?",
+            "user_answer": 3,
+            "correct_answer": 3,
+            "is_correct": true,
+            "score": 10
+        },
+        {
+            "date": "2026-11-10T21:55:29.648157",
+            "question": "농구에서 한 팀의 선수는 몇 명인가?",
+            "user_answer": 2,
+            "correct_answer": 2,
+            "is_correct": true,
+            "score": 10
+        },
+        {
+            "date": "2026-11-10T22:01:02.172936",
+            "question": "농구에서 '트리플 더블'은?",
+            "user_answer": 3,
+            "correct_answer": 3,
+            "is_correct": true,
+            "score": 10
+        },
+        {
+            "date": "2026-11-10T22:01:11.645090",
+            "question": "농구 경기의 한 쿼터는 몇 분인가?",
+            "user_answer": 2,
+            "correct_answer": 2,
+            "is_correct": true,
+            "score": 10
+        },
+        {
+            "date": "2026-11-10T22:01:18.202642",
             "question": "농구에서 파울이 6번이 되면?",
             "user_answer": 3,
             "correct_answer": 3,
