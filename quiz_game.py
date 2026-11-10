@@ -29,7 +29,7 @@ class QuizGame:
             with open(self.state_file, "r", encoding="utf-8") as f:
                 data = json.load(f)        #json.load() 파일 객체 타입을 받아 직접 읽기, json.loads() 문자열 타입을 직접 또는 그 변수를 받아 읽을 때
 
-            self.quizzes = [Quiz.from_dict(q) for q in data.get("quizzes", [])]  #data.get(키, 기본값)은 키가 있으면 그 값 반환, 키가 없으면 기본값 반환하기에 에러 예방
+            self.quizzes = [Quiz.from_dict(q) for q in data.get("quizzes", [])]  #data.get(키, 기본값)은 키가 있으면 그 값 반환, 키가 없으면 기본값 반환하기에 에러 예방. 그리고 [리스트 컴프리헨션]의 내부에서 생성되는 값은 계속 append된다. 
             self.best_score = data.get("best_score", 0)
             self.best_record = data.get("best_record", {"correct": 0, "total": 0})
             self.history = data.get("history", [])
