@@ -599,3 +599,11 @@ class QuizGame:
 if __name__ == "__main__":
     game = QuizGame()
     game.run()
+
+
+
+# 15. 상황 2: 테스트용 데이터는 커밋을 하지 않는다. 왜냐하면 개발환경이나 실행환경을 오염 시키기 때문이다. 그런데 커밋했다면
+git rm --cached state.json              # --cached 깃의 준비영역으로 깃저장소만 ~~하라
+echo "state.json" >> .gitignore
+git add .gitignore
+git commit -m "Chore: state.json 추적 중지"      #chore는 집안일 또는 잡무의 의미로 기능 추가도 아니고, 버그 수정도 아닌 어떤 것.
