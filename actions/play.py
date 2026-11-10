@@ -41,7 +41,7 @@ def play_game_action(game):
     # 5단계: 포기 처리
     if user_input.lower() == 'q':
         print("\n⏭️  이 문제를 건너뜁니다.")
-        print(f"정답은: {quiz.choices[quiz.anser]}\n")
+        print(f"정답은: {quiz.choices[quiz.answer]}\n")
         return
     
     # 6단계: 힌트 요청 처리
