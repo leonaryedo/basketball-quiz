@@ -166,7 +166,9 @@ git pull     #원격 저장소의 최신 변경사항을 로컬에 가져옵니�
 
 ## 7. 개발 환경
 
+#### Git: 2.53 이상
 #### Python: 3.10 이상
+<img width="1171" height="120" alt="image" src="https://github.com/user-attachments/assets/460b2cf0-5c1d-45c2-b9c1-1866ec23b645" />
 
 #### 외부 라이브러리: 없음 (표준 라이브러리만 사용)
 
@@ -186,6 +188,10 @@ git pull     #원격 저장소의 최신 변경사항을 로컬에 가져옵니�
        ├── quizList.png
        └── solveQuiz.png
 ```
+
+## 9. git log --oneline --graph 출력
+<img width="1818" height="621" alt="image" src="https://github.com/user-attachments/assets/21311a21-291c-4709-b65c-8df83d6a02b7" />
+
 
 # E1-2 🎯 농구 퀴즈 게임 [과제 목표]
 
