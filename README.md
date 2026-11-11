@@ -81,20 +81,27 @@ git pull     #원격 저장소의 최신 변경사항을 로컬에 가져옵니�
 ## 5. 파일 구조
 
 ```
-basketball-quiz/
-├── .gitignore              # Git 추적 제외 목록
-├── README.md               # 프로젝트 문서
-├── quiz.py                 # Quiz 클래스 (개별 퀴즈 표현)
-├── quiz_game.py            # QuizGame 클래스 (실행 파일-게임 전체 관리)
-├── state.json              # 데이터 저장소 JSON (퀴즈/최고 점수/기록)
-└── docs/
-    └── screenshots/        # 제출용 실행 화면 캡처
-        ├── menu.png
-        ├── play.png
-        ├── add_quiz.png
-        ├── score.png
-        ├── delete_quiz.png
-        └── history.png
+..
+└── basketball-quiz
+    ├── README.md                # 프로젝트 문서
+    ├── actions
+    │   ├── __init__.py          # 패키지로 인식되기 위한 파일
+    │   ├── manage.py            # 퀴즈 추가, 퀴즈 삭제, 퀴즈 목록 기능 구현 모듈
+    │   ├── play.py              # 퀴즈 풀기 기능 구현 모듈
+    │   └── record.py            # 최고 점수 확인, 점수 기록 보기 기능 구현 모듈
+    ├── docs
+    │   └── screemshots          # 제출용 실행 화면 캡처
+    │       ├── addQuiz.png
+    │       ├── checkBestScore.png
+    │       ├── checkHistory.png
+    │       ├── deleteQuiz.png
+    │       ├── mainMenu.png
+    │       ├── quizList.png
+    │       └── solveQuiz.png
+    ├── quiz.py                   # Quiz 클래스 (개별 퀴즈 표현)
+    ├── quiz_game.py              # QuizGame 클래스 (실행 파일-게임 전체 관리)
+    └── state.json                # 데이터 저장소 JSON (퀴즈/최고 점수/기록)
+
 ```
 
 ## 6. 데이터 파일 설명(state.json 경로/역할/필드 구조)
@@ -125,12 +132,14 @@ basketball-quiz/
       },
       "history": [
           {
-              "date": "2024-01-15 14:30:00",
-              "correct": 4,
-              "total": 5,
-              "score": 80
-          }
-      ]
+            "date": "2026-11-10T22:01:18.202642",
+            "question": "농구에서 파울이 6번이 되면?",
+            "user_answer": 3,
+            "correct_answer": 3,
+            "is_correct": true,
+            "score": 10
+        }
+    ]
   }
   ```
   - 필드 설명
@@ -148,8 +157,10 @@ basketball-quiz/
   | `best_record.total` | 정수 | 최고 점수 달성 시 전체 문제 수 |
   | `history` | 배열 | 게임 플레이 기록 (최근 순서) |
   | `history[].date` | 문자열 | 플레이 날짜/시간 |
-  | `history[].correct` | 정수 | 해당 게임의 정답 수 |
-  | `history[].total` | 정수 | 해당 게임의 전체 문제 수 |
+  | `history[].question` | 문자열 | 해당 게임의 문제 |
+  | `history[].user_answer` | 정수 | 유저가 제출한 정답 |
+  | `history[].correct_answer` | 정수 | 문제의 정답 |
+  | `history[].is_correct` | 불린 | 정답 유무 |
   | `history[].score` | 정수 | 해당 게임의 점수 |
 
 ## 7. 개발 환경
@@ -164,10 +175,13 @@ basketball-quiz/
 
 #### 아래 경로에 실행 결과 스크린샷이 저장되어 있습니다:
 ```
-docs/screenshots/
-├── menu.png          # 메뉴 화면
-├── play.png          # 퀴즈 풀기 화면
-├── add_quiz.png      # 퀴즈 추가 화면
-├── score.png         # 최고 점수 확인 화면
-├── delete_quiz.png   # 퀴즈 삭제
+  docs
+   └── screemshots
+       ├── addQuiz.png
+       ├── checkBestScore.png
+       ├── checkHistory.png
+       ├── deleteQuiz.png
+       ├── mainMenu.png
+       ├── quizList.png
+       └── solveQuiz.png
 ```
