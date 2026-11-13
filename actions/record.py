@@ -27,6 +27,7 @@ def show_history_action(game):
     # 1단계: 기록 존재 여부 확인
     if not game.history:
         print("\n❌ 풀이 기록이 없습니다.\n")
+        input("엔터를 눌러 계속하세요...")
         return
 
     # 2단계: 기록 출력
