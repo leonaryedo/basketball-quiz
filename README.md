@@ -199,9 +199,20 @@ git merge --no-ff record
 ```
 차이: 위쪽의 머지는 일반적인 머지로 main브렌치로 돌아온 이후에 commit이 없으면 Fast-forward를 우선적으로 수행하여 일직선 형태가 됨. --no-ff 즉, no fast-forwaed 옵션은 main브렌치로 돌아온 이후에 commit없어도 fast-forward를 하지 않고 머지 커밋(이 시점에서 두 브렌치가 합쳐짐)을 생성한다.
 
+
+## 10. JSON파일에 문제가 수백, 수천, 수만 개가 되었을 때 프로그램의 처리의 문제
+두 파일을 각각 불러올 때 시간이 얼마나 걸리는지 측정하는 코드를 작성하여 실시(performanceTest폴더)
+```bash
+cd performanceTest
+python3 performance_test.py
+```
+<img width="1248" height="400" alt="image" src="https://github.com/user-attachments/assets/8c99b156-cf67-445e-8c79-e744765b68c0" />
+
+
+
 ## 10. 향후 프로그램 수정할 지점
 #### 실시간 데이터 반영(문제수, 최고점수 등)
-#### JSON파일에 문제가 수백, 수천, 수만 개가 되었을 때 프로그램의 처리의 문
+
 
 # E1-2 🎯 농구 퀴즈 게임 [과제 목표]
 
