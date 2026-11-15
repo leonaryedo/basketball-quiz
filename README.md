@@ -207,6 +207,7 @@ cd performanceTest
 python3 performance_test.py
 ```
 <img width="1248" height="400" alt="image" src="https://github.com/user-attachments/assets/8c99b156-cf67-445e-8c79-e744765b68c0" />
+결론: 정말 문제가 수십만개가 되어도 크게 실행에는 문제가 없을 뜻^^
 
 
 
