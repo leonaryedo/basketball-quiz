@@ -112,7 +112,7 @@ class QuizGame:
                 elif choice in menu_actions:     # v in dict이면 v가 dict에 있는가? boolean반환. 단, 딕셔너리면 키값 비교, 리스트면 요소 비교, 문자역이면 부분 문자열 비교
                     menu_actions[choice]()
             
-            except KeyboardInterrupt:
+            except KeyboardInterrupt:            # 보통 프로그램 실행 중 Ctrl+C를 누르면 발생하며, 이 구문이 있으면 프로그램이 갑자기 종료되는 대신 원하는 종료 처리를 할 수 있음.
                 print("\n\n⚠️  강제 종료 감지. 저장 후 종료합니다")
                 self.save_state(show_message=False)
                 break
